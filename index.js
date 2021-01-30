@@ -16,5 +16,11 @@ app.get('/hello/:name', function(req, res) {
 });
 
 app.get('/',function(req,res){
-  res.render('hello.html',{name:"enginas"})
+  res.render('hello.html',{
+    
+    
+    sorular:[{ title: "foo", id: 1 }, { title: "bar", id: 2}] 
+
+  
+  })
 })
