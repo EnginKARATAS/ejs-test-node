@@ -1,12 +1,20 @@
 const express = require('express')
-const app = express()
+var app = express();
 const port = 3000
-
+app.listen(port,() => console.log("listening : "+ port))
 const nunjucks = require('nunjucks')
-nunjucks.configure({ autoescape: true });
-nunjucks.renderString('Hello {{ username }}', { username: 'James' });
 
-app.get('/', (req, res) => {
-    res.render('index.ejs', {})
-  })
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+nunjucks.configure('views', {
+    autoescape: true,
+    express: app
+});
+
+app.get('/hello/:name', function(req, res) {
+    res.render('hello.html',{
+      name: req.params.name
+    });
+});
+
+app.get('/',function(req,res){
+  res.render('hello.html',{name:"enginas"})
+})
